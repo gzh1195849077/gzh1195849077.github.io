@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C++基本语法 | CodeHua</title><meta name="keywords" content="C++"><meta name="author" content="高振华"><meta name="copyright" content="高振华"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++ 程序可以定义为对象的集合，这些对象通过调用彼此的方法进行交互。现在让我们简要地看一下什么是类、对象，方法、即时变量。  对象 - 对象具有状态和行为。例如：一只狗的状态 :  颜色、名称、品种，行为 : 摇动、叫唤、吃。对象是类的实例。 类 - 类可以定义为描述对象行为&#x2F;状态的模板&#x2F;蓝图。 方法 - 从基本上说，一个方法表示一种行为。一个类可以包含多个方法。可以在方法中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++基本语法">
+<meta property="og:url" content="http://example.com/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="CodeHua">
+<meta property="og:description" content="C++ 程序可以定义为对象的集合，这些对象通过调用彼此的方法进行交互。现在让我们简要地看一下什么是类、对象，方法、即时变量。  对象 - 对象具有状态和行为。例如：一只狗的状态 :  颜色、名称、品种，行为 : 摇动、叫唤、吃。对象是类的实例。 类 - 类可以定义为描述对象行为&#x2F;状态的模板&#x2F;蓝图。 方法 - 从基本上说，一个方法表示一种行为。一个类可以包含多个方法。可以在方法中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-08-26T14:12:56.000Z">
+<meta property="article:modified_time" content="2022-08-26T14:40:42.971Z">
+<meta property="article:author" content="高振华">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-26 22:40:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CodeHua</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++基本语法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-26T14:12:56.000Z" title="发表于 2022-08-26 22:12:56">2022-08-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-26T14:40:42.971Z" title="更新于 2022-08-26 22:40:42">2022-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++基本语法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>C++ 程序可以定义为对象的集合，这些对象通过调用彼此的方法进行交互。现在让我们简要地看一下什么是类、对象，方法、即时变量。</p>
+<ul>
+<li><strong>对象 -</strong> 对象具有状态和行为。例如：一只狗的状态 :  颜色、名称、品种，行为 : 摇动、叫唤、吃。对象是类的实例。</li>
+<li><strong>类 -</strong> 类可以定义为描述对象行为&#x2F;状态的模板&#x2F;蓝图。</li>
+<li><strong>方法 -</strong> 从基本上说，一个方法表示一种行为。一个类可以包含多个方法。可以在方法中写入逻辑、操作数据以及执行所有的动作。</li>
+<li><strong>即时变量 -</strong> 每个对象都有其独特的即时变量。对象的状态是由这些即时变量的值创建的。</li>
+</ul>
+<h2 id="C-程序结构"><a href="#C-程序结构" class="headerlink" title="C++ 程序结构"></a>C++ 程序结构</h2><p>让我们看一段简单的代码，可以输出单词 <em>Hello World</em>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// main() 是程序开始执行的地方</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;Hello World&quot;</span>; <span class="comment">// 输出 Hello World</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们讲解一下上面这段程序：</p>
+<ul>
+<li>c++语言定义了一些头文件，这些头文件包含了程序中必需的或有用的信息。上面这段程序中，包含了头文件<iostream></li>
+<li>using namespace std 告诉编译器使用std命名空间，命名空间是C++一个相对新的概念</li>
+<li>单行注释以&#x2F;&#x2F;开头，在行末结束</li>
+<li>int main()是主函数，程序从这里开始执行，返回int</li>
+<li><strong>cout &lt;&lt; “Hello World”;</strong> 会在屏幕上显示消息 “Hello World”。</li>
+<li><strong>return 0;</strong> 终止 main( )函数，并向调用进程返回值 0。</li>
+</ul>
+<h2 id="编译-amp-执行-C-程序"><a href="#编译-amp-执行-C-程序" class="headerlink" title="编译 &amp; 执行 C++ 程序"></a>编译 &amp; 执行 C++ 程序</h2><p>接下来让我们看看如何把源代码保存在一个文件中，以及如何编译并运行它。下面是简单的步骤：</p>
+<ul>
+<li>打开一个文本编辑器，添加上述代码。</li>
+<li>保存文件为 hello.cpp。</li>
+<li>打开命令提示符，进入到保存文件所在的目录。</li>
+<li>键入 ‘g++ hello.cpp ‘，输入回车，编译代码。如果代码中没有错误，命令提示符会跳到下一行，并生成 a.out 可执行文件。</li>
+<li>现在，键入 ‘ a.out’ 来运行程序。</li>
+<li>您可以看到屏幕上显示 ‘ Hello World ‘。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ hello.cpp</span><br><span class="line">$ ./a.out</span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
+
+<p>请确保您的路径中已包含 g++ 编译器，并确保在包含源文件 hello.cpp 的目录中运行它。</p>
+<p>您也可以使用 makefile 来编译 C&#x2F;C++ 程序。</p>
+<h2 id="C-中的分号-amp-语句块"><a href="#C-中的分号-amp-语句块" class="headerlink" title="C++ 中的分号 &amp; 语句块"></a>C++ 中的分号 &amp; 语句块</h2><p>在 C++ 中，分号是语句结束符。也就是说，每个语句必须以分号结束。它表明一个逻辑实体的结束。</p>
+<p>例如，下面是三个不同的语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = y;</span><br><span class="line">y = y+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">add</span>(x, y);</span><br></pre></td></tr></table></figure>
+
+<p>语句块是一组使用大括号括起来的按逻辑连接的语句。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;Hello World&quot;</span>; <span class="comment">// 输出 Hello World</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>C++ 不以行末作为结束符的标识，因此，您可以在一行上放置多个语句。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = y;</span><br><span class="line">y = y+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">add</span>(x, y);</span><br></pre></td></tr></table></figure>
+
+<p>等同于</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = y; y = y+<span class="number">1</span>; <span class="built_in">add</span>(x, y);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="C-标识符"><a href="#C-标识符" class="headerlink" title="C++ 标识符"></a>C++ 标识符</h2><p>C++ 标识符是用来标识变量、函数、类、模块，或任何其他用户自定义项目的名称。一个标识符以字母 A-Z 或 a-z 或下划线 _ 开始，后跟零个或多个字母、下划线和数字（0-9）。</p>
+<p>C++ 标识符内不允许出现标点字符，比如 @、&amp; 和 %。C++ 是区分大小写的编程语言。因此，在 C++ 中，<strong>Manpower</strong> 和 <strong>manpower</strong> 是两个不同的标识符。</p>
+<p>下面列出几个有效的标识符：</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mohd       zara    abc   move_name  a_123</span><br><span class="line">myname50   _temp   j     a23b9      retVal</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="C-关键字"><a href="#C-关键字" class="headerlink" title="C++ 关键字"></a>C++ 关键字</h2><p>下表列出了 C++ 中的保留字。这些保留字不能作为常量名、变量名或其他标识符名称。</p>
+<table>
+<thead>
+<tr>
+<th>asm</th>
+<th>else</th>
+<th>new</th>
+<th>this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto</td>
+<td>enum</td>
+<td>operator</td>
+<td>throw</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>explicit</td>
+<td>private</td>
+<td>true</td>
+</tr>
+<tr>
+<td>break</td>
+<td>export</td>
+<td>protected</td>
+<td>try</td>
+</tr>
+<tr>
+<td>case</td>
+<td>extern</td>
+<td>public</td>
+<td>typedef</td>
+</tr>
+<tr>
+<td>catch</td>
+<td>false</td>
+<td>register</td>
+<td>typeid</td>
+</tr>
+<tr>
+<td>char</td>
+<td>float</td>
+<td>reinterpret_cast</td>
+<td>typename</td>
+</tr>
+<tr>
+<td>class</td>
+<td>for</td>
+<td>return</td>
+<td>union</td>
+</tr>
+<tr>
+<td>const</td>
+<td>friend</td>
+<td>short</td>
+<td>unsigned</td>
+</tr>
+<tr>
+<td>const_cast</td>
+<td>goto</td>
+<td>signed</td>
+<td>using</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>if</td>
+<td>sizeof</td>
+<td>virtual</td>
+</tr>
+<tr>
+<td>default</td>
+<td>inline</td>
+<td>static</td>
+<td>void</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>int</td>
+<td>static_cast</td>
+<td>volatile</td>
+</tr>
+<tr>
+<td>do</td>
+<td>long</td>
+<td>struct</td>
+<td>wchar_t</td>
+</tr>
+<tr>
+<td>double</td>
+<td>mutable</td>
+<td>switch</td>
+<td>while</td>
+</tr>
+<tr>
+<td>dynamic_cast</td>
+<td>namespace</td>
+<td>template</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>完整关键字介绍可查阅：<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/cpp-keyword-intro.html">C++ 的关键字（保留字）完整介绍 | 菜鸟教程 (runoob.com)</a></p>
+<h2 id="三字符组"><a href="#三字符组" class="headerlink" title="三字符组"></a>三字符组</h2><p>三字符组就是用于表示另一个字符的三个字符序列，又称为三字符序列。三字符序列总是以两个问号开头。</p>
+<p>三字符序列不太常见，但 C++ 标准允许把某些字符指定为三字符序列。以前为了表示键盘上没有的字符，这是必不可少的一种方法。</p>
+<p>三字符序列可以出现在任何地方，包括字符串、字符序列、注释和预处理指令。</p>
+<p>下面列出了最常用的三字符序列：</p>
+<table>
+<thead>
+<tr>
+<th align="left">三字符组</th>
+<th align="left">替换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">??&#x3D;</td>
+<td align="left">#</td>
+</tr>
+<tr>
+<td align="left">??&#x2F;</td>
+<td align="left">\</td>
+</tr>
+<tr>
+<td align="left">??’</td>
+<td align="left">^</td>
+</tr>
+<tr>
+<td align="left">??(</td>
+<td align="left">[</td>
+</tr>
+<tr>
+<td align="left">??)</td>
+<td align="left">]</td>
+</tr>
+<tr>
+<td align="left">??!</td>
+<td align="left">|</td>
+</tr>
+<tr>
+<td align="left">??&lt;</td>
+<td align="left">{</td>
+</tr>
+<tr>
+<td align="left">??&gt;</td>
+<td align="left">}</td>
+</tr>
+<tr>
+<td align="left">??-</td>
+<td align="left">~</td>
+</tr>
+</tbody></table>
+<p>如果希望在源程序中有两个连续的问号，且不希望被预处理器替换，这种情况出现在字符常量、字符串字面值或者是程序注释中，可选办法是用字符串的自动连接：”…?””?…”或者转义序列：”…??…”。</p>
+<p>从Microsoft Visual C++ 2010版开始，该编译器默认不再自动替换三字符组。如果需要使用三字符组替换（如为了兼容古老的软件代码），需要设置编译器命令行选项&#x2F;Zc:trigraphs</p>
+<p>g++仍默认支持三字符组，但会给出编译警告。</p>
+<h2 id="C-中的空格"><a href="#C-中的空格" class="headerlink" title="C++ 中的空格"></a>C++ 中的空格</h2><p>只包含空格的行，被称为空白行，可能带有注释，C++ 编译器会完全忽略它。</p>
+<p>在 C++ 中，空格用于描述空白符、制表符、换行符和注释。空格分隔语句的各个部分，让编译器能识别语句中的某个元素（比如 int）在哪里结束，下一个元素在哪里开始。因此，在下面的语句中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> age;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，int 和 age 之间必须至少有一个空格字符（通常是一个空白符），这样编译器才能够区分它们。另一方面，在下面的语句中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruit = apples + oranges;   <span class="comment">// 获取水果的总数</span></span><br></pre></td></tr></table></figure>
+
+<p>fruit 和 &#x3D;，或者 &#x3D; 和 apples 之间的空格字符不是必需的，但是为了增强可读性，您可以根据需要适当增加一些空格。</p>
+<h2 id="C-注释"><a href="#C-注释" class="headerlink" title="C++ 注释"></a>C++ 注释</h2><p>程序的注释是解释性语句，您可以在 C++ 代码中包含注释，这将提高源代码的可读性。所有的编程语言都允许某种形式的注释。</p>
+<p>C++ 支持单行注释和多行注释。注释中的所有字符会被 C++ 编译器忽略。</p>
+<p>C++ 注释一般有两种：</p>
+<ul>
+<li><strong>&#x2F;&#x2F;</strong> - 一般用于单行注释。</li>
+<li>&#x2F;*** … *&#x2F;** - 一般用于多行注释。</li>
+</ul>
+<h3 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h3><p>单行注释以 <strong>&#x2F;&#x2F;</strong> 开始，直到行末为止。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 这是一个注释</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>也可以放在语句后面：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span>; <span class="comment">// 输出 Hello World!</span></span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当上面的代码被编译时，编译器会忽略 <strong>&#x2F;&#x2F; 这是一个注释</strong> 和 **&#x2F;&#x2F; 输出 Hello World!**，最后会产生以下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h3><p>C++ 注释以 <strong>&#x2F;*</strong> 开始，以 ***&#x2F;** 终止。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* 这是注释 */</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* C++ 注释也可以</span></span><br><span class="line"><span class="comment">     * 跨行</span></span><br><span class="line"><span class="comment">     */</span> </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <strong>&#x2F;*</strong> 和 <em><strong>&#x2F;</strong> 注释内部，</em><em>&#x2F;&#x2F;</em>* 字符没有特殊的含义。在 <strong>&#x2F;&#x2F;</strong> 注释内，**&#x2F;*** 和 ***&#x2F;** 字符也没有特殊的含义。因此，您可以在一种注释内嵌套另一种注释。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 用于输出 Hello World 的注释</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">cout &lt;&lt; &quot;Hello World&quot;; // 输出 Hello World</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h3><p><strong>#if 0 … #endif</strong> 属于条件编译，0 即为参数。</p>
+<p>此外，我们还可以使用 <strong>#if 0 … #endif</strong> 来实现注释，且可以实现嵌套，格式为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line">   code</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>你可以把 <strong>#if 0</strong> 改成 <strong>#if 1</strong> 来执行 <strong>code</strong> 的代码。</p>
+<p>这种形式对程序调试也可以帮助，测试时使用 <strong>#if 1</strong> 来执行测试代码，发布后使用 <strong>#if 0</strong> 来屏蔽测试代码。</p>
+<p><strong>#if</strong> 后可以是任意的条件语句。</p>
+<p>下面的代码如果 condition 条件为 true 执行 code1 ，否则执行 code2。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> condition</span></span><br><span class="line">  code1</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">  code2</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">高振华</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">http://example.com/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">CodeHua</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/26/C++%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++数据类型</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/26/C++%E7%AE%80%E4%BB%8B/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++简介</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/26/C++常量/" title="C++常量"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">C++常量</div></div></a></div><div><a href="/2022/08/26/C++简介/" title="C++简介"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">C++简介</div></div></a></div><div><a href="/2022/08/26/C++数据类型/" title="C++数据类型"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">C++数据类型</div></div></a></div><div><a href="/2022/08/26/c++变量作用域/" title="c++变量作用域"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">c++变量作用域</div></div></a></div><div><a href="/2022/08/26/c++变量类型/" title="c++变量类型"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">c++变量类型</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">高振华</div><div class="author-info__description">A little bit of everything</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">C++ 程序结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91-amp-%E6%89%A7%E8%A1%8C-C-%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">编译 &amp; 执行 C++ 程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%AD%E7%9A%84%E5%88%86%E5%8F%B7-amp-%E8%AF%AD%E5%8F%A5%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">C++ 中的分号 &amp; 语句块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">C++ 标识符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">5.</span> <span class="toc-text">C++ 关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%AD%97%E7%AC%A6%E7%BB%84"><span class="toc-number">6.</span> <span class="toc-text">三字符组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC"><span class="toc-number">7.</span> <span class="toc-text">C++ 中的空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E6%B3%A8%E9%87%8A"><span class="toc-number">8.</span> <span class="toc-text">C++ 注释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="toc-number">8.1.</span> <span class="toc-text">单行注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="toc-number">8.2.</span> <span class="toc-text">多行注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="toc-number">8.3.</span> <span class="toc-text">条件编译</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/26/C++%E5%B8%B8%E9%87%8F/" title="C++常量"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++常量"/></a><div class="content"><a class="title" href="/2022/08/26/C++%E5%B8%B8%E9%87%8F/" title="C++常量">C++常量</a><time datetime="2022-08-26T15:30:58.000Z" title="发表于 2022-08-26 23:30:58">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/26/c++%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/" title="c++变量作用域"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c++变量作用域"/></a><div class="content"><a class="title" href="/2022/08/26/c++%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/" title="c++变量作用域">c++变量作用域</a><time datetime="2022-08-26T15:24:33.000Z" title="发表于 2022-08-26 23:24:33">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/26/c++%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B/" title="c++变量类型"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c++变量类型"/></a><div class="content"><a class="title" href="/2022/08/26/c++%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B/" title="c++变量类型">c++变量类型</a><time datetime="2022-08-26T15:07:39.000Z" title="发表于 2022-08-26 23:07:39">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/26/C++%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="C++数据类型"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++数据类型"/></a><div class="content"><a class="title" href="/2022/08/26/C++%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="C++数据类型">C++数据类型</a><time datetime="2022-08-26T14:41:11.000Z" title="发表于 2022-08-26 22:41:11">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="C++基本语法"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++基本语法"/></a><div class="content"><a class="title" href="/2022/08/26/C++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="C++基本语法">C++基本语法</a><time datetime="2022-08-26T14:12:56.000Z" title="发表于 2022-08-26 22:12:56">2022-08-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 高振华</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
