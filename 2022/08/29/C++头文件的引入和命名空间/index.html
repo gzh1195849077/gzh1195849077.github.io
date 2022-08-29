@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C++头文件的引入和命名空间 | CodeHua</title><meta name="keywords" content="C++,C"><meta name="author" content="高振华"><meta name="copyright" content="高振华"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="头文件的引入 VS2022的安装目录G:\new_soft\vs2022\ide\VC\Tools\MSVC\14.32.31326\include  如果是标准库头文件，那么既可以采用&lt;&gt;的方式，又可以采用” “的方式，而用户自定义的头文件只能采用” “的方式。 例如，如下这种方式是正确的： 12#include &lt;iostream&gt;   效率较高#include &amp;qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++头文件的引入和命名空间">
+<meta property="og:url" content="http://example.com/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/index.html">
+<meta property="og:site_name" content="CodeHua">
+<meta property="og:description" content="头文件的引入 VS2022的安装目录G:\new_soft\vs2022\ide\VC\Tools\MSVC\14.32.31326\include  如果是标准库头文件，那么既可以采用&lt;&gt;的方式，又可以采用” “的方式，而用户自定义的头文件只能采用” “的方式。 例如，如下这种方式是正确的： 12#include &lt;iostream&gt;   效率较高#include &amp;qu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-08-29T02:04:21.000Z">
+<meta property="article:modified_time" content="2022-08-29T02:51:03.749Z">
+<meta property="article:author" content="高振华">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-29 10:51:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CodeHua</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++头文件的引入和命名空间</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-29T02:04:21.000Z" title="发表于 2022-08-29 10:04:21">2022-08-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-29T02:51:03.749Z" title="更新于 2022-08-29 10:51:03">2022-08-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++头文件的引入和命名空间"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="头文件的引入"><a href="#头文件的引入" class="headerlink" title="头文件的引入"></a>头文件的引入</h1><blockquote>
+<p>VS2022的安装目录G:\new_soft\vs2022\ide\VC\Tools\MSVC\14.32.31326\include</p>
+</blockquote>
+<p><strong>如果是标准库头文件，那么既可以采用&lt;&gt;的方式，又可以采用” “的方式，而用户自定义的头文件只能采用” “的方式</strong>。</p>
+<p>例如，如下这种方式是正确的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>   效率较高</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;iostream&quot;</span>   效率较低</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>使用 “xxx.h”,告诉编译器,从当前工作目录开始查找</li>
+<li>使用&lt;xxx.h&gt;,告诉编译器,从系统默认目录中去查找</li>
+<li>当不确定的时候,就使用双引号,系统会从当前工作目录找完成后,然后再去系统默认目录中查找。若 #include “xxx.h” 查找成功，则遮蔽 #include &lt;xxx.h&gt; 所能找到的同名文件；否则再按照 #include &lt;xxx.h&gt; 的方式查找文件。另外标准库头文件都放在 #include &lt;&gt; 所查找的位置</li>
+</ul>
+<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><p><img src="/../img/posts/image-20220829102431567.png" alt="image-20220829102431567"></p>
+<p>不同的文件夹可以有相同名字的文件</p>
+<h2 id="定义及使用命名空间"><a href="#定义及使用命名空间" class="headerlink" title="定义及使用命名空间"></a>定义及使用命名空间</h2><p>命名空间的定义使用关键字namespace,后跟命名空间的名称，如下所示</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> namespace_name&#123;</span><br><span class="line">	<span class="comment">//代码声明</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了调用带有命名空间的函数或变量，需要在前面加上命名空间的名称，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name::code;  <span class="comment">//code可以是变量或函数</span></span><br></pre></td></tr></table></figure>
+
+<p>让我们来看看命名空间如何为变量或函数等实体定义范围，如下</p>
+<p><img src="/../img/posts/image-20220829103033240.png" alt="image-20220829103033240"></p>
+<p>产生的结果</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Inside first_space</span><br><span class="line">Inside second_space</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="using指令"><a href="#using指令" class="headerlink" title="using指令"></a>using指令</h2><p>您可以使用using namespace指令，这样在使用命名空间就可以不用在前面加上命名空间的名称。这个指令会告诉编译器，后续的代码将使用指定的命名空间中的名称。例子：</p>
+<p><img src="/../img/posts/image-20220829103311499.png" alt="image-20220829103311499"></p>
+<p>using指令也可以用来指定命名空间中的特定项目。例如，如果您只打算使用std命名空间中的cout部分，您可以使用如下的语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cout;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>随后的代码中，在使用cout时就不用加上命名空间作为前缀，但是std命名空间中其他项目仍然要加上命名空间作为前缀，如下</p>
+<p><img src="/../img/posts/image-20220829103531473.png" alt="image-20220829103531473"></p>
+<h2 id="标准命名空间"><a href="#标准命名空间" class="headerlink" title="标准命名空间"></a>标准命名空间</h2><p>上面介绍了我们自己定义的命名空间的使用方法，其实在C++标准库中，基本上所有的库函数、类等等(称之为标识符)都定义在一个名为std的命名空间里面，std就是standard的缩写，称之为标准库。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br></pre></td></tr></table></figure>
+
+<p>其中iostream就是std标准库函数所在的文件</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">高振华</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/">http://example.com/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">CodeHua</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/28/C++%E5%86%85%E5%AD%98%E5%9B%9B%E5%8C%BA/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++内存四区</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/28/C++const修饰指针/" title="C++const修饰指针"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-28</div><div class="title">C++const修饰指针</div></div></a></div><div><a href="/2022/08/28/C++内存四区/" title="C++内存四区"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-28</div><div class="title">C++内存四区</div></div></a></div><div><a href="/2022/08/27/C++修饰符类型/" title="C++修饰符类型"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-27</div><div class="title">C++修饰符类型</div></div></a></div><div><a href="/2022/08/27/C++函数/" title="C++函数"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-27</div><div class="title">C++函数</div></div></a></div><div><a href="/2022/08/27/C++判断/" title="C++判断"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-27</div><div class="title">C++判断</div></div></a></div><div><a href="/2022/08/26/C++变量作用域/" title="C++变量作用域"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">C++变量作用域</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">高振华</div><div class="author-info__description">A little bit of everything</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">头文件的引入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">2.</span> <span class="toc-text">命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">2.1.</span> <span class="toc-text">定义及使用命名空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#using%E6%8C%87%E4%BB%A4"><span class="toc-number">2.2.</span> <span class="toc-text">using指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">2.3.</span> <span class="toc-text">标准命名空间</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/" title="C++头文件的引入和命名空间"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++头文件的引入和命名空间"/></a><div class="content"><a class="title" href="/2022/08/29/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E5%BC%95%E5%85%A5%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/" title="C++头文件的引入和命名空间">C++头文件的引入和命名空间</a><time datetime="2022-08-29T02:04:21.000Z" title="发表于 2022-08-29 10:04:21">2022-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/C++%E5%86%85%E5%AD%98%E5%9B%9B%E5%8C%BA/" title="C++内存四区"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++内存四区"/></a><div class="content"><a class="title" href="/2022/08/28/C++%E5%86%85%E5%AD%98%E5%9B%9B%E5%8C%BA/" title="C++内存四区">C++内存四区</a><time datetime="2022-08-28T03:49:55.000Z" title="发表于 2022-08-28 11:49:55">2022-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/C++const%E4%BF%AE%E9%A5%B0%E6%8C%87%E9%92%88/" title="C++const修饰指针"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++const修饰指针"/></a><div class="content"><a class="title" href="/2022/08/28/C++const%E4%BF%AE%E9%A5%B0%E6%8C%87%E9%92%88/" title="C++const修饰指针">C++const修饰指针</a><time datetime="2022-08-28T03:30:03.000Z" title="发表于 2022-08-28 11:30:03">2022-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/27/%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%80%81%E7%9A%84%E8%81%8C%E5%B7%A5%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="基于多态的职工管理系统"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于多态的职工管理系统"/></a><div class="content"><a class="title" href="/2022/08/27/%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%80%81%E7%9A%84%E8%81%8C%E5%B7%A5%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="基于多态的职工管理系统">基于多态的职工管理系统</a><time datetime="2022-08-27T08:03:59.000Z" title="发表于 2022-08-27 16:03:59">2022-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/27/C++%E6%8E%A5%E5%8F%A3-%E6%8A%BD%E8%B1%A1%E7%B1%BB/" title="C++接口(抽象类)"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++接口(抽象类)"/></a><div class="content"><a class="title" href="/2022/08/27/C++%E6%8E%A5%E5%8F%A3-%E6%8A%BD%E8%B1%A1%E7%B1%BB/" title="C++接口(抽象类)">C++接口(抽象类)</a><time datetime="2022-08-27T07:09:38.000Z" title="发表于 2022-08-27 15:09:38">2022-08-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 高振华</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
