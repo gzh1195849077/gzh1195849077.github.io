@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C++静态库和动态库 | CodeHua</title><meta name="keywords" content="c++"><meta name="author" content="高振华"><meta name="copyright" content="高振华"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="静态库什么是静态库? 静态库的名字一般是xxx.lib(windows:.lib; linux:.a),利用静态函数库编译成的文件比较大，因为整个 函数库的所有数据都会被整合进目标代码中，他的优点就显而易见了，即编译后的执行程序不需要外部的函数库支持，因为所有使用的函数都已经被编译进去了。当然这也会成为他的缺点，因为如果静态函数库改变了，那么你的程序必须重新编译。 建立静态库建立静态库工程：我们从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++静态库和动态库">
+<meta property="og:url" content="http://example.com/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/index.html">
+<meta property="og:site_name" content="CodeHua">
+<meta property="og:description" content="静态库什么是静态库? 静态库的名字一般是xxx.lib(windows:.lib; linux:.a),利用静态函数库编译成的文件比较大，因为整个 函数库的所有数据都会被整合进目标代码中，他的优点就显而易见了，即编译后的执行程序不需要外部的函数库支持，因为所有使用的函数都已经被编译进去了。当然这也会成为他的缺点，因为如果静态函数库改变了，那么你的程序必须重新编译。 建立静态库建立静态库工程：我们从">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-09-09T01:08:32.000Z">
+<meta property="article:modified_time" content="2022-09-09T05:28:22.442Z">
+<meta property="article:author" content="高振华">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-09 13:28:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">CodeHua</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签云</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++静态库和动态库</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-09T01:08:32.000Z" title="发表于 2022-09-09 09:08:32">2022-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-09T05:28:22.442Z" title="更新于 2022-09-09 13:28:22">2022-09-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++静态库和动态库"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h1><p>什么是静态库?</p>
+<p>静态库的名字一般是xxx.lib(windows:<em>.lib; linux:</em>.a),利用静态函数库编译成的文件比较大，因为整个 函数库的所有数据都会被整合进目标代码中，他的优点就显而易见了，即编译后的执行程序不需要外部的函数库支持，因为所有使用的函数都已经被编译进去了。当然这也会成为他的缺点，因为如果静态函数库改变了，那么你的程序必须重新编译。</p>
+<h2 id="建立静态库"><a href="#建立静态库" class="headerlink" title="建立静态库"></a>建立静态库</h2><p>建立静态库工程：我们从最简单的开始，先建立一个Windows桌面向导的静态库工程， 先新建工程，选择Windows桌面向导,新建一个hello_lib工程：</p>
+<p><img src="/../img/posts/image-20220909093038707.png" alt="image-20220909093038707"></p>
+<p>点完成之后我们会得到一个空白的新工程</p>
+<h2 id="添加静态库相关类"><a href="#添加静态库相关类" class="headerlink" title="添加静态库相关类:"></a>添加静态库相关类:</h2><p>我们如果需要提供一个类，那么最简单的，先在工程右键添加一个C++类，我们起名为<strong>hello_lib</strong>:</p>
+<p><img src="/../img/posts/image-20220909093531923.png" alt="image-20220909093531923"></p>
+<h3 id="hello-lib-h"><a href="#hello-lib-h" class="headerlink" title="hello_lib.h"></a>hello_lib.h</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Heelo_Lib</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="function"><span class="type">int</span> <span class="title">Sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hello-lib-cpp"><a href="#hello-lib-cpp" class="headerlink" title="hello_lib.cpp"></a>hello_lib.cpp</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello_lib.cpp : 定义静态库的函数。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;framework.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hello_lib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> 这是一个库函数示例</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fnhellolib</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Heelo_Lib::Add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="生成解决方案"><a href="#生成解决方案" class="headerlink" title="生成解决方案"></a>生成解决方案</h2><blockquote>
+<p> 注意：是生成解决方案 不是运行程序，运行会报错</p>
+</blockquote>
+<p><img src="/../img/posts/image-20220909094344999.png" alt="image-20220909094344999"></p>
+<p>然后可以在<code>lib静态库\hello_lib\x64\Debug</code>找到 hello_lib.lib文件</p>
+<p><img src="/../img/posts/image-20220909094309299.png" alt="image-20220909094309299"></p>
+<h2 id="使用静态库"><a href="#使用静态库" class="headerlink" title="使用静态库"></a>使用静态库</h2><p>我们编译得到的库文件如何使用呢？因为我们在静态库工程提供的接口文件是hello_lib.h，所以我们要用到的（对外发布的）就是hello_lib.h和编译出来的hello_lib.lib（具体实现隐藏起来）接下来我们再新建一个工程，为了最简化，我们建立一个控制台应用程序testexe：</p>
+<p><img src="/../img/posts/image-20220909094841581.png" alt="image-20220909094841581"></p>
+<p>有多种方式使用这样的Lib，如果我们在同一个工作区来使用这个库，那么我们就可以在新建的工程里面直接设置依赖项目（链接库），这样系统在编译的时候会自动的为我们链接这个库文件，我们只需要包含一下提供静态库函数接口的XXX.h文件即可。我们现在先假设这个静态库是单独发布给其他人用的，那么我们可以设置静态库和XXX.h的目录(头文件查找目录和*.lib查找目录)，添加到VC工程的目录配置，这样就可以和使用系统库一样的使用了，另外我们为了演示方便，先把库文件放到testexe工程下面,：</p>
+<p><img src="/../img/posts/image-20220909095107958.png" alt="image-20220909095107958"></p>
+<p>把hello_lib.h和hello_lib.lib添加到testexe cpp文件同级目录下</p>
+<p><img src="/../img/posts/image-20220909101256038.png" alt="image-20220909101256038"></p>
+<p>我们在Testexe工程右键添加&#x2F;现有项把TestLib.h给加进工程：</p>
+<h3 id="指定链接库文件"><a href="#指定链接库文件" class="headerlink" title="指定链接库文件"></a>指定链接库文件</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p><img src="/../img/posts/image-20220909101320743.png" alt="image-20220909101320743"></p>
+<p><img src="/../img/posts/image-20220909101359208.png" alt="image-20220909101359208"></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>test.cpp中声明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN64</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;hello_dll.lib&quot;</span>)<span class="comment">//x64</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;hello_dll.lib&quot;</span>)<span class="comment">//x86</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>打开testexe.cpp写上相关代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;hello_lib.h&quot;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Heelo_Lib test;</span><br><span class="line">	cout &lt;&lt; test.Add(1, 2) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; Sub(1, 2) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>运行，就好啦。</p>
+<h1 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h1><h2 id="建立动态库"><a href="#建立动态库" class="headerlink" title="建立动态库"></a>建立动态库</h2><p><img src="/../img/posts/image-20220909101511801.png" alt="image-20220909101511801"></p>
+<p><img src="/../img/posts/image-20220909101526376.png" alt="image-20220909101526376"></p>
+<p><img src="/../img/posts/image-20220909101603041.png" alt="image-20220909101603041"></p>
+<p><img src="/../img/posts/image-20220909101616886.png" alt="image-20220909101616886"></p>
+<p>我们得到这样一个项目：</p>
+<p><img src="/../img/posts/image-20220909101719318.png" alt="image-20220909101719318"></p>
+<p>dllmain.cpp里面为我们实现了一个DllMain函数：</p>
+<p><img src="/../img/posts/image-20220909102012776.png" alt="image-20220909102012776"></p>
+<p>DllMain对我们来说并不是至关重要的,我们来简单看一下它的作用：前面说过，动态库dll和静态库最大的区别就是，动态库是可以独立运行的文件，通俗一点讲，和可执行文件没有太大的本质区别，所以当其他可执行文件(exe或者其他dll)调用到该dll的时候，系统会执行一个入口函数，做一些初始化之类的工作，当然这个入口函数和可执行文件exe有一个最大的区别就是这个入口函数不是必须的，也就是说没有这个入口函数依然能编译dll，这个入口函数就是DllMain。</p>
+<p>下面我们简单的先说一下系统何时会调用这个入口函数</p>
+<h2 id="修改hello-dll-h"><a href="#修改hello-dll-h" class="headerlink" title="修改hello_dll.h"></a>修改hello_dll.h</h2><p><img src="/../img/posts/image-20220909104514857.png" alt="image-20220909104514857"></p>
+<p>My_test_dllApi 名字可以随便取。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef HELLODLL_EXPORTS</span><br><span class="line">#define My_test_dllApi __declspec(dllexport)</span><br><span class="line">#else</span><br><span class="line">#define My_test_dllApi __declspec(dllimport)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>这就是函数的导出与使用导出函数的全部奥妙了。你的DLL工程已经在工程设置中定义了一个宏HELLODLL_EXPORTS，因此你的函数声明只要前面加My_test_dllApi就表示把它导出，而DLL的使用者由于没有定义这个宏，所以它包含这个头文件时把你的函数看作导入的。通过模仿这个例子，你就可以写一系列的标记为导出的函数了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> HELLODLL_EXPORTS</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> My_test_dllApi __declspec(dllexport)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> My_test_dllApi __declspec(dllimport)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">My_test_dllApi</span> Heelo_Lib</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function">My_test_dllApi <span class="type">int</span> <span class="title">Sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="修改hello-dll-cpp"><a href="#修改hello-dll-cpp" class="headerlink" title="修改hello_dll.cpp"></a>修改hello_dll.cpp</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;framework.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hello_dll.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Heelo_Lib::Add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="生成解决方案-1"><a href="#生成解决方案-1" class="headerlink" title="生成解决方案"></a>生成解决方案</h2><p><img src="/../img/posts/image-20220909104659976.png" alt="image-20220909104659976"></p>
+<p>可以生成两个文件  lib 和 dll文件。</p>
+<h2 id="使用动态链接库"><a href="#使用动态链接库" class="headerlink" title="使用动态链接库"></a>使用动态链接库</h2><p>我们也创建一个testdllexe的工程</p>
+<p><strong>所有的操作都一样（配置*.h和*.lib），唯一的区别就是我们多了个dll</strong>，把dll放到编译出来的exe目录，不然会提示找不到dll（dll是程序运行的环境和依赖）：</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">高振华</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/">http://example.com/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">CodeHua</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">c++</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/09/%E7%94%B5%E6%9C%BA/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">电机</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/31/C++关键字/" title="C++关键字"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">C++关键字</div></div></a></div><div><a href="/2022/08/31/C++友元/" title="C++友元"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">C++友元</div></div></a></div><div><a href="/2022/08/31/C++指针和函数/" title="C++指针和函数"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">C++指针和函数</div></div></a></div><div><a href="/2022/08/29/C++拷贝构造函数调用时机/" title="C++拷贝构造函数调用时机"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-29</div><div class="title">C++拷贝构造函数调用时机</div></div></a></div><div><a href="/2022/08/31/C++指针和数组/" title="C++指针和数组"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">C++指针和数组</div></div></a></div><div><a href="/2022/08/31/C++指针数组和函数/" title="C++指针数组和函数"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">C++指针数组和函数</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/icon/myicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">高振华</div><div class="author-info__description">A little bit of everything</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">静态库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E9%9D%99%E6%80%81%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">建立静态库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%9D%99%E6%80%81%E5%BA%93%E7%9B%B8%E5%85%B3%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">添加静态库相关类:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-lib-h"><span class="toc-number">1.2.1.</span> <span class="toc-text">hello_lib.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-lib-cpp"><span class="toc-number">1.2.2.</span> <span class="toc-text">hello_lib.cpp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.3.</span> <span class="toc-text">生成解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">使用静态库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E9%93%BE%E6%8E%A5%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">指定链接库文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.2.</span> <span class="toc-text">运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">动态链接库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%8A%A8%E6%80%81%E5%BA%93"><span class="toc-number">2.1.</span> <span class="toc-text">建立动态库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9hello-dll-h"><span class="toc-number">2.2.</span> <span class="toc-text">修改hello_dll.h</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9hello-dll-cpp"><span class="toc-number">2.3.</span> <span class="toc-text">修改hello_dll.cpp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-number">2.4.</span> <span class="toc-text">生成解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93"><span class="toc-number">2.5.</span> <span class="toc-text">使用动态链接库</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/" title="C++静态库和动态库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++静态库和动态库"/></a><div class="content"><a class="title" href="/2022/09/09/C++%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/" title="C++静态库和动态库">C++静态库和动态库</a><time datetime="2022-09-09T01:08:32.000Z" title="发表于 2022-09-09 09:08:32">2022-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/09/%E7%94%B5%E6%9C%BA/" title="电机"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电机"/></a><div class="content"><a class="title" href="/2022/09/09/%E7%94%B5%E6%9C%BA/" title="电机">电机</a><time datetime="2022-09-09T00:58:57.000Z" title="发表于 2022-09-09 08:58:57">2022-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/08/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/" title="电子模块的使用"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电子模块的使用"/></a><div class="content"><a class="title" href="/2022/09/08/%E7%94%B5%E5%AD%90%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/" title="电子模块的使用">电子模块的使用</a><time datetime="2022-09-08T04:49:26.000Z" title="发表于 2022-09-08 12:49:26">2022-09-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/07/%E7%94%B5%E5%AD%A6/" title="电学"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电学"/></a><div class="content"><a class="title" href="/2022/09/07/%E7%94%B5%E5%AD%A6/" title="电学">电学</a><time datetime="2022-09-07T01:51:33.000Z" title="发表于 2022-09-07 09:51:33">2022-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/06/arduino%E7%BC%96%E7%A8%8B%E8%AF%AD%E5%8F%A5/" title="arduino编程语句"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="arduino编程语句"/></a><div class="content"><a class="title" href="/2022/09/06/arduino%E7%BC%96%E7%A8%8B%E8%AF%AD%E5%8F%A5/" title="arduino编程语句">arduino编程语句</a><time datetime="2022-09-06T12:05:26.000Z" title="发表于 2022-09-06 20:05:26">2022-09-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 高振华</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
